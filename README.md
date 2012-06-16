@@ -1,4 +1,5 @@
-sublime-goto-open-file
-======================
+##GotoOpenFile
 
-plugin for Sublime Text 2 that opens a quick panel for switching between currently-opened files
+Sometimes, if you are working on a small subsection of a particularly large project, Goto Anything might get too distracting.  GotoOpenFile brings up a quick panel that only includes opened files.
+
+To activate it, the default keybinding is ctrl-shift-o (or cmd-shift-o).
