@@ -25,7 +25,10 @@ class ViewSelector(object):
     if view.is_scratch():
       return view.name()
 
-    return os.path.basename(view.file_name())
+    file_name = os.path.basename(view.file_name())
+    mod_star = '*' if view.is_dirty() else ''
+
+    return '%s%s' % (file_name, mod_star)
 
   def __get_path(self, view):
     if view.is_scratch():
