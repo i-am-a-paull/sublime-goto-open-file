@@ -12,7 +12,10 @@ class ViewSelector(object):
 
   def __init__(self, window):
     self.window = window
-    self.views = window.views()
+    if window.active_view().settings().get('goto_open_file_active_group_only', False):
+      self.views = window.views_in_group(window.active_group())
+    else:
+      self.views = window.views()
 
   def select(self, index):
     if index != -1:
