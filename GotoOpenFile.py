@@ -1,5 +1,8 @@
 import sublime, sublime_plugin, os
 
+settings = sublime.load_settings('GotoOpenFile.sublime-settings')
+
+
 class GotoOpenFileCommand(sublime_plugin.TextCommand):
 
   def run(self, edit):
@@ -12,7 +15,7 @@ class ViewSelector(object):
 
   def __init__(self, window):
     self.window = window
-    if window.active_view().settings().get('goto_open_file_active_group_only', False):
+    if settings.get('active_group_only', False):
       self.views = window.views_in_group(window.active_group())
     else:
       self.views = window.views()
