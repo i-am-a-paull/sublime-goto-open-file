@@ -2,17 +2,20 @@ import sublime, sublime_plugin, os
 
 class GotoOpenFileCommand(sublime_plugin.TextCommand):
 
-  def run(self, edit):
+  def run(self, edit, active_group=False):
     window = sublime.active_window()
-    selector = ViewSelector(window)
     
+    selector = ViewSelector(window, active_group)
     window.show_quick_panel(selector.get_items(), selector.select)
 
 class ViewSelector(object):
 
-  def __init__(self, window):
+  def __init__(self, window, active_group):
     self.window = window
-    self.views = window.views()
+    if active_group:
+      self.views = window.views_in_group(window.active_group())
+    else:
+      self.views = window.views()
 
   def select(self, index):
     if index != -1:
