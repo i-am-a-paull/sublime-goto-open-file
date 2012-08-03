@@ -27,6 +27,8 @@ class ViewSelector(object):
   def __get_display_name(self, view):
     if view.is_scratch():
       return view.name()
+    if !view.file_name():
+      return "<Unsaved>"
 
     file_name = os.path.basename(view.file_name())
     mod_star = '*' if view.is_dirty() else ''
