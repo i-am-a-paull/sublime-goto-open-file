@@ -25,22 +25,21 @@ class ViewSelector(object):
     return [[self.__get_display_name(view), self.__get_path(view)] for view in self.views]
 
   def __get_display_name(self, view):
-    if view.is_scratch():
-      return view.name()
-    if not view.file_name():
-      return "untitled"
-
-    file_name = os.path.basename(view.file_name())
     mod_star = '*' if view.is_dirty() else ''
 
-    return '%s%s' % (file_name, mod_star)
+    if view.is_scratch() or not view.file_name():
+      disp_name = view.name() if len(view.name()) > 0 else 'untitled'
+    else:
+      disp_name = os.path.basename(view.file_name())
+    
+    return '%s%s' % (disp_name, mod_star)
 
   def __get_path(self, view):
     if view.is_scratch():
-      return view.name()
+      return ''
 
     if not view.file_name():
-      return "<Unsaved>"
+      return '<unsaved>'
 
     folders = self.window.folders()
 
