@@ -5,3 +5,5 @@ GotoOpenFile was created by Philip Oliver-Paull (phildopus) and improved upon wi
 Alexey Myasnikov (myas)
 
 Matt Briggs (mbriggs)
+
+Richie Jefts (buerkle)
