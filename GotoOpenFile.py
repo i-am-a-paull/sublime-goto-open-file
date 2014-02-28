@@ -29,8 +29,9 @@ class ViewSelector(object):
                 self.__get_path(view)
             ] for view in self.views
         ]
-        if self.__get_setting('sort_views'):
-            self.items = sorted(self.items)
+        sort_views_opt = self.__get_setting('sort_views')
+        if sort_views_opt:
+            self.items = sorted(self.items, key = ((lambda x: x[0].lower()) if 'ignore_case' == sort_views_opt else (lambda x: x)))
 
     def select(self, index):
         if index != -1:
