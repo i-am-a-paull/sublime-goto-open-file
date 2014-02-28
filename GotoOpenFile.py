@@ -31,7 +31,7 @@ class ViewSelector(object):
         ]
         sort_views_opt = self.__get_setting('sort_views')
         if sort_views_opt:
-            self.items = sorted(self.items, key = ((lambda x: x[0].lower()) if 'ignore_case' == sort_views_opt else (lambda x: x)))
+            self.items = sorted(self.items, key = ((lambda x: list(map(str.lower, x))) if 'ignore_case' == sort_views_opt else (lambda x: x)))
 
     def select(self, index):
         if index != -1:
