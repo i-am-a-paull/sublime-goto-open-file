@@ -1,3 +1,9 @@
 {
-  "sort_views": false
+    // Show the a sorted list of open files, instead of in the order of the
+    // tabs themselves.
+    "sort_views": false,
+
+    // Show a preview of the tab as you highlight each entry in the list.
+    // Revert to current view if nothing was selected (hit ESC).
+    "show_preview": true
 }
