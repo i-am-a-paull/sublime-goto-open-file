@@ -24,7 +24,14 @@ class GotoOpenFileCommand(sublime_plugin.TextCommand):
         window = sublime.active_window()
 
         selector = ViewSelector(window, active_group)
-        window.show_quick_panel(selector.items, selector.select)
+        show_preview = get_setting(window.active_view(), 'show_preview')
+        if show_preview:
+            window.show_quick_panel(selector.items,
+                                    selector.select,
+                                    selected_index=selector.intial_selection,
+                                    on_highlight=selector.on_highlight)
+        else:
+            window.show_quick_panel(selector.items, selector.select)
 
 
 class ViewSelector(object):
@@ -44,11 +51,20 @@ class ViewSelector(object):
         if get_setting(window.active_view(), 'sort_views'):
             self.items = sorted(self.items)
 
+        for i, (n, p) in enumerate(self.items):
+            if self.__get_view_by_path(p).id() == window.active_view().id():
+                self.intial_selection = i
+                print(i)
+                break
+
     def select(self, index):
         if index != -1:
             self.window.focus_view(
                 self.__get_view_by_path(self.items[index][1])
             )
+
+    def on_highlight(self, index):
+        pass
 
     def __get_view_by_path(self, path):
         for view in self.views:
