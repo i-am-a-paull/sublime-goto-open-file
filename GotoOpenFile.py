@@ -54,7 +54,6 @@ class ViewSelector(object):
         for i, (n, p) in enumerate(self.items):
             if self.__get_view_by_path(p).id() == window.active_view().id():
                 self.intial_selection = i
-                print(i)
                 break
 
     def select(self, index):
@@ -62,9 +61,16 @@ class ViewSelector(object):
             self.window.focus_view(
                 self.__get_view_by_path(self.items[index][1])
             )
+        else:
+            self.window.focus_view(
+                self.__get_view_by_path(self.items[self.intial_selection][1])
+            )
 
     def on_highlight(self, index):
-        pass
+        if index != -1:
+            self.window.focus_view(
+                self.__get_view_by_path(self.items[index][1])
+            )
 
     def __get_view_by_path(self, path):
         for view in self.views:
