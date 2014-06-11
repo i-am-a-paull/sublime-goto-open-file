@@ -55,13 +55,14 @@ class ViewSelector(object):
             if self.__get_view_by_path(p).id() == window.active_view().id():
                 self.intial_selection = i
                 break
+        self.intial_selection = -1
 
     def select(self, index):
         if index != -1:
             self.window.focus_view(
                 self.__get_view_by_path(self.items[index][1])
             )
-        else:
+        elif self.intial_selection != -1:
             self.window.focus_view(
                 self.__get_view_by_path(self.items[self.intial_selection][1])
             )
