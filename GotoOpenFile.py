@@ -6,6 +6,18 @@ SETTINGS_NAME = 'GotoOpenFile'
 SETTINGS_FILE_NAME = '%s.sublime-settings' % SETTINGS_NAME
 
 
+def get_setting(active_view, key):
+    view_settings = active_view.settings()
+    if view_settings.has(SETTINGS_NAME):
+        project_settings = view_settings.get(SETTINGS_NAME)
+        for proj_setting_key in project_settings:
+            if proj_setting_key == key:
+                return project_settings[proj_setting_key]
+
+    plugin_settings = sublime.load_settings(SETTINGS_FILE_NAME)
+    return plugin_settings.get(key, None)
+
+
 class GotoOpenFileCommand(sublime_plugin.TextCommand):
 
     def run(self, edit, active_group=False):
@@ -29,7 +41,7 @@ class ViewSelector(object):
                 self.__get_path(view)
             ] for view in self.views
         ]
-        if self.__get_setting('sort_views'):
+        if get_setting(window.active_view(), 'sort_views'):
             self.items = sorted(self.items)
 
     def select(self, index):
@@ -72,14 +84,3 @@ class ViewSelector(object):
                 return relpath
 
         return view.file_name()
-
-    def __get_setting(self, key):
-        view_settings = self.window.active_view().settings()
-        if view_settings.has(SETTINGS_NAME):
-            project_settings = view_settings.get(SETTINGS_NAME)
-            for proj_setting_key in project_settings:
-                if proj_setting_key == key:
-                    return project_settings[proj_setting_key]
-
-        plugin_settings = sublime.load_settings(SETTINGS_FILE_NAME)
-        return plugin_settings.get(key, None)
