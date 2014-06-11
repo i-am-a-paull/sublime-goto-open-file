@@ -55,7 +55,8 @@ class ViewSelector(object):
             if self.__get_view_by_path(p).id() == window.active_view().id():
                 self.intial_selection = i
                 break
-        self.intial_selection = -1
+        else:
+            self.intial_selection = -1
 
     def select(self, index):
         if index != -1:
