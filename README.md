@@ -1,4 +1,6 @@
-##GotoOpenFile
+##GotoOpenFile (Retired)
+
+*This plugin is no longer updated. The successor was chosen during a cleanout in Package Control (https://github.com/wbond/package_control_channel/pull/3330). It is at https://github.com/rajeshvaya/Sublime-Extended-Tab-Switcher.*
 
 Sometimes, if you are working on a small subsection of a particularly large
 project, Goto Anything might get too distracting. GotoOpenFile brings up a quick
