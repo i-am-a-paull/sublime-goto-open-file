@@ -24,6 +24,7 @@ In your user settings:
 
 ```
 
+To sort case insensitive use ```"sort_views": "ignore_case" ```.
 
 This plugin is licensed under the 2-clause BSD license:
 
